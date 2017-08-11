@@ -1,0 +1,27 @@
+<br>
+<br>
+<br>
+<!-- Footer ================================================== -->
+<hr>
+{:hook('footer')}
+<div id="footer" class="footer">
+	<div class="links">
+		合作伙伴<br>
+		<php>$links=sp_getlinks();</php>
+		<foreach name="links" item="vo">
+			<a href="{$vo.link_url}" target="{$vo.link_target}"><img src="__TMPL__{$vo.link_image}" ></a>
+		</foreach>
+	</div>
+	<p>
+		<ul>
+			<li>联系我们</li>
+			<li>地址：</li>
+			<li>电话：</li>
+			<li>邮箱：</li>
+		</ul>
+	</p>
+</div>
+<div id="backtotop">
+	<i class="fa fa-arrow-circle-up"></i>
+</div>
+{$site_tongji}

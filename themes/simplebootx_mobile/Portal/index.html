@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{$site_seo_title} {$site_name}</title>
+  <meta name="keywords" content="{$site_seo_keywords}" />
+  <meta name="description" content="{$site_seo_description}">
+  <tc_include file="Public:head" />
+  <link href="__TMPL__Public/css/slippry/slippry.css" rel="stylesheet">
+
+  <style>
+    .caption-wraper{position: absolute;left:370px;bottom:70px;}
+    .caption-wraper .caption{
+      position: relative;left:-50%;
+      background-color: rgba(0, 0, 0, 0.54);
+      padding: 0.4em 1em;
+      color:#fff;
+      -webkit-border-radius: 1.2em;
+      -moz-border-radius: 1.2em;
+      -ms-border-radius: 1.2em;
+      -o-border-radius: 1.2em;
+      border-radius: 1.2em;
+     
+    }
+     h1{
+        font-size: 19px;
+      }
+    @media (max-width: 767px){
+      /*.sy-box{margin: 0px -20px 0 -20px;}*/
+      .caption-wraper{left:15%;bottom: 10%;}
+      .caption-wraper .caption{
+        left: 0;
+        padding: 0.2em 0.4em;
+        font-size: 0.92em;
+         -webkit-border-radius: 1.2em;
+      -moz-border-radius: 1.2em;
+      -ms-border-radius: 1.2em;
+      -o-border-radius: 1.2em;
+      border-radius: 1.2em;
+
+
+
+      }
+             h1{
+          font-size: 16px;
+        }
+    }
+    @media (max-width: 527px){
+        /*.sy-box{margin: 12px -20px 0 -20px;}*/
+        .caption-wraper{left:0;bottom: 0.4em;}
+        .caption-wraper .caption{
+        left: 0;
+        padding: 0.2em 0.4em;
+        
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        -ms-border-radius: 0;
+        -o-border-radius: 0;
+        border-radius: 0;}
+        h1{
+          font-size: 13px;
+        }
+    }
+
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    
+</style>
+
+</head>
+<body>
+
+
+<tc_include file="Public:nav" />
+<php>
+  $home_slides=sp_sql_posts("cid:8;field:post_title,post_excerpt,post_content,tid,smeta;order:listorder desc;");
+</php>
+
+
+<ul id="homeslider" class="unstyled">
+  <foreach name="home_slides" item="vo">
+  	<php>$smeta=json_decode($vo['smeta'],true);</php>
+  <if condition="!empty($smeta['photo'])">
+  	
+    <li>
+      <div class="caption-wraper" >
+      
+        <div class="caption" >
+	        <h1 style="color:#fff;">{$vo.post_title}</h1>
+	        
+	         <p style="width:100%;>{$vo.post_excerpt}</p> 
+	        <p><a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}"><img src="__TMPL__Public/images/more.png" ></a></p>
+        </div>
+      </div>
+      <a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}"><img  src="__ROOT__/data/upload/{$smeta['photo'][0]['url']}" alt="{$smeta['photo'][0]['alt']}"></a>
+    </li>
+
+   </if>
+  </foreach>
+</ul>
+<div class="container">
+
+
+  
+  <php> $content=sp_sql_page(58);</php>
+  <div style="padding-left:1px;padding-right:1px;padding-bottom:2%;">
+    <div class="bs-callout bs-callout-info " >
+	    <div class="row">
+	    <div class="col-md-12 col-sm-12" >
+	   		{$content['post_excerpt']|msubstr=0,112,'utf-8',false}
+	    </div>
+	        <div  class="col-md-3 col-sm-3 pull-right">
+	        <a href="{:U('page/index?&id=58')}}"  class="about btn btn-info" style="padding:6px 11px;">关于我们</a>
+	        </div>
+	    </div>
+    </div>
+ </div>     
+    
+ 
+
+
+  <div class="row">
+    <div class="col-sm-12" >
+    <h2 class="font-large nospace bgh" ><a href="{:U('list/index?id=8')}">&nbsp;新闻中心</a></h2>
+      <php>
+        $newscenter=sp_sql_posts("cid:8;field:post_title,post_excerpt,tid,smeta;order:listorder asc;limit:4;");
+      </php>
+      <ul class="phoneul">
+      <foreach name="newscenter" item="news">
+        <li style="text-align:left;margin-bottom: 5px;"><a title="{$news.post_title}" href="{:leuu('article/index',array('id'=>$news['tid'],'cid'=>$news['term_id']))}">{$news.post_title|msubstr=0,25,'utf-8',false}</a></li>
+      </foreach>
+    </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 class="font-large nospace bgh" > <a href="{:U('list/index?id=10')}">&nbsp;行业资讯</a></h2>
+       <php>
+        $infomation=sp_sql_posts("cid:10;field:post_title,post_excerpt,tid,smeta;order:listorder asc;limit:4;");
+      </php>
+      <ul class="phoneul">
+      <foreach name="infomation" item="info">
+        <li style="margin-bottom: 5px;"><a title="{$info.post_title}" href="{:leuu('article/index',array('id'=>$info['tid'],'cid'=>$info['term_id']))}" >{$info.post_title|msubstr=0,27,'utf-8',false}</a></li>
+      </foreach>
+    </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <h2 class="bgh"><a>产品展示</a><span class="target">专注 高效 务实 创新</span></h2>
+    </div>
+  </div>
+
+  <php>
+    $lastnews=sp_sql_posts("cid:12;field:post_title,post_excerpt,tid,smeta;order:listorder asc;limit:4;");
+
+  </php>
+  <div class="row" >
+     
+      <!-- <php>$smeta=json_decode($vo['smeta'],true);</php> -->
+      
+      <!-- <div class="col-md-6 col-sm-6 col-xs-6">   -->
+  <!--           <div >
+              <a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}">
+                <if condition="empty($smeta['thumb'])">
+                  <img src="__TMPL__Public/images/default_tupian1.png" class="img-responsive" alt="{$vo.post_title}"/>
+                  <else />
+                  <img src="{:sp_get_asset_upload_path($smeta['thumb'])}" class="img-responsive img-thumbnail" alt="{$vo.post_title}" />
+                </if>
+              </a>
+            </div>   -->   
+
+           <div class="swiper-container">
+              <div class="swiper-wrapper">
+                  <foreach name="lastnews" item="vo"> 
+                  <php>$smeta=json_decode($vo['smeta'],true);</php>
+                    <div class="swiper-slide">
+                      <a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}" target="_blank">
+                        <if condition="empty($smeta['thumb'])">
+                            <img src="__TMPL__Public/images/default_tupian1.png" class="img-responsive" alt="{$vo.post_title}"/>
+                        <else />
+                            <img src="{:sp_get_asset_upload_path($smeta['thumb'])}" class="img-responsive img-thumbnail" alt="{$vo.post_title}" />
+                        </if>
+                      </a>
+                    </div>
+                  </foreach>
+                  
+              </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+
+
+
+      </div>
+     
+  </div>
+
+
+
+  <tc_include file="Public:footer"/> 
+
+<tc_include file="Public:scripts"/>
+<script src="__TMPL__Public/js/slippry.min.js"></script>
+<script>
+$(function() {
+  var demo1 = $("#homeslider").slippry({
+    transition: 'fade',
+    useCSS: true,
+    captions: false,
+    speed: 1000,
+    pause: 3000,
+    auto: true,
+    preload: 'visible'
+  });
+});
+  </script>
+
+{:hook('footer_end')}
+</body>
+</html>
+=======
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{$site_seo_title} {$site_name}</title>
+  <meta name="keywords" content="{$site_seo_keywords}" />
+  <meta name="description" content="{$site_seo_description}">
+  <tc_include file="Public:head" />
+  <link href="__TMPL__Public/css/slippry/slippry.css" rel="stylesheet">
+
+  <style>
+    .caption-wraper{position: absolute;left:370px;bottom:70px;}
+    .caption-wraper .caption{
+      position: relative;left:-50%;
+      background-color: rgba(0, 0, 0, 0.54);
+      padding: 0.4em 1em;
+      color:#fff;
+      -webkit-border-radius: 1.2em;
+      -moz-border-radius: 1.2em;
+      -ms-border-radius: 1.2em;
+      -o-border-radius: 1.2em;
+      border-radius: 1.2em;
+     
+    }
+     h1{
+        font-size: 19px;
+      }
+    @media (max-width: 767px){
+      /*.sy-box{margin: 0px -20px 0 -20px;}*/
+      .caption-wraper{left:15%;bottom: 10%;}
+      .caption-wraper .caption{
+        left: 0;
+        padding: 0.2em 0.4em;
+        font-size: 0.92em;
+         -webkit-border-radius: 1.2em;
+      -moz-border-radius: 1.2em;
+      -ms-border-radius: 1.2em;
+      -o-border-radius: 1.2em;
+      border-radius: 1.2em;
+
+
+
+      }
+             h1{
+          font-size: 16px;
+        }
+    }
+    @media (max-width: 527px){
+        /*.sy-box{margin: 12px -20px 0 -20px;}*/
+        .caption-wraper{left:0;bottom: 0.4em;}
+        .caption-wraper .caption{
+        left: 0;
+        padding: 0.2em 0.4em;
+        
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        -ms-border-radius: 0;
+        -o-border-radius: 0;
+        border-radius: 0;}
+        h1{
+          font-size: 13px;
+        }
+    }
+
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    
+</style>
+
+</head>
+<body>
+
+
+<tc_include file="Public:nav" />
+<php>
+  $home_slides=sp_sql_posts("cid:8;field:post_title,post_excerpt,post_content,tid,smeta;order:listorder desc;");
+</php>
+
+
+<ul id="homeslider" class="unstyled">
+  <foreach name="home_slides" item="vo">
+  	<php>$smeta=json_decode($vo['smeta'],true);</php>
+  <if condition="!empty($smeta['photo'])">
+  	
+    <li>
+      <div class="caption-wraper" >
+      
+        <div class="caption" >
+	        <h1 style="color:#fff;">{$vo.post_title}</h1>
+	        
+	         <p style="width:100%;>{$vo.post_excerpt}</p> 
+	        <p><a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}"><!-- <img src="__TMPL__Public/images/more.png" > --></a></p>
+        </div>
+      </div>
+      <a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}"><img  src="__ROOT__/data/upload/{$smeta['photo'][0]['url']}" alt="{$smeta['photo'][0]['alt']}"></a>
+    </li>
+
+   </if>
+  </foreach>
+</ul>
+
+
+
+
+
+
+
+<div class="container">
+
+
+  
+  <php> $content=sp_sql_page(58);</php>
+  <div style="padding-left:1px;padding-right:1px;padding-bottom:2%;">
+    <div class="bs-callout bs-callout-info " >
+	    <div class="row">
+	    <div class="col-md-12 col-sm-12" >
+	   		{$content['post_excerpt']|msubstr=0,112,'utf-8',false}
+	    </div>
+	        <div  class="col-md-3 col-sm-3 pull-right">
+	        <a href="{:U('page/index?&id=58')}}"  class="about btn btn-info" style="padding:6px 11px;">关于我们</a>
+	        </div>
+	    </div>
+    </div>
+ </div>     
+    
+ 
+
+
+  <div class="row">
+    <div class="col-sm-12" >
+    <h2 class="font-large nospace bgh" ><a href="{:U('list/index?id=8')}">&nbsp;新闻中心</a></h2>
+      <php>
+        $newscenter=sp_sql_posts("cid:8;field:post_title,post_excerpt,tid,smeta;order:listorder asc;limit:4;");
+      </php>
+      <ul class="phoneul">
+      <foreach name="newscenter" item="news">
+        <li style="text-align:left;margin-bottom: 5px;"><a title="{$news.post_title}" href="{:leuu('article/index',array('id'=>$news['tid'],'cid'=>$news['term_id']))}">{$news.post_title|msubstr=0,25,'utf-8',false}</a></li>
+      </foreach>
+    </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 class="font-large nospace bgh" > <a href="{:U('list/index?id=10')}">&nbsp;行业资讯</a></h2>
+       <php>
+        $infomation=sp_sql_posts("cid:10;field:post_title,post_excerpt,tid,smeta;order:listorder asc;limit:4;");
+      </php>
+      <ul class="phoneul">
+      <foreach name="infomation" item="info">
+        <li style="margin-bottom: 5px;"><a title="{$info.post_title}" href="{:leuu('article/index',array('id'=>$info['tid'],'cid'=>$info['term_id']))}" >{$info.post_title|msubstr=0,27,'utf-8',false}</a></li>
+      </foreach>
+    </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <h2 class="bgh"><a>产品展示</a><span class="target">专注 高效 务实 创新</span></h2>
+    </div>
+  </div>
+
+  <php>
+    $lastnews=sp_sql_posts("cid:12;field:post_title,post_excerpt,tid,smeta;order:listorder asc;limit:4;");
+
+  </php>
+  <div class="row" >
+     
+      <!-- <php>$smeta=json_decode($vo['smeta'],true);</php> -->
+      
+      <!-- <div class="col-md-6 col-sm-6 col-xs-6">   -->
+  <!--           <div >
+              <a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}">
+                <if condition="empty($smeta['thumb'])">
+                  <img src="__TMPL__Public/images/default_tupian1.png" class="img-responsive" alt="{$vo.post_title}"/>
+                  <else />
+                  <img src="{:sp_get_asset_upload_path($smeta['thumb'])}" class="img-responsive img-thumbnail" alt="{$vo.post_title}" />
+                </if>
+              </a>
+            </div>   -->   
+
+           <div class="swiper-container">
+              <div class="swiper-wrapper">
+                  <foreach name="lastnews" item="vo"> 
+                  <php>$smeta=json_decode($vo['smeta'],true);</php>
+                    <div class="swiper-slide">
+                      <a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}" target="_blank">
+                        <if condition="empty($smeta['thumb'])">
+                            <img src="__TMPL__Public/images/default_tupian1.png" class="img-responsive" alt="{$vo.post_title}"/>
+                        <else />
+                            <img src="{:sp_get_asset_upload_path($smeta['thumb'])}" class="img-responsive img-thumbnail" alt="{$vo.post_title}" />
+                        </if>
+                      </a>
+                    </div>
+                  </foreach>
+                  
+              </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+
+
+
+      </div>
+     
+  </div>
+
+
+
+  <tc_include file="Public:footer"/> 
+
+<tc_include file="Public:scripts"/>
+<script src="__TMPL__Public/js/slippry.min.js"></script>
+<script>
+$(function() {
+  var demo1 = $("#homeslider").slippry({
+    transition: 'fade',
+    useCSS: true,
+    captions: false,
+    speed: 1000,
+    pause: 3000,
+    auto: true,
+    preload: 'visible'
+  });
+});
+  </script>
+
+{:hook('footer_end')}
+</body>
+</html>

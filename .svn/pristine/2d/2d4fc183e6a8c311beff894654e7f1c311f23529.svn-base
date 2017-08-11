@@ -1,0 +1,40 @@
+{:hook('body_start')}
+
+<div class="navbar navbar-fixed-top" >
+  <div class="row" style="background-color:#000">
+  <div class="span3"></div>
+  <div class="span3">
+    <span style="color:#fff;font-size:10px;">欢迎光临广州华腾软件工作室</span>
+  </div>
+  <div class="span4"></div>
+  <div class="span4" style="text-align: right;">
+    <span ><a onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.gzhtsoft.com');" style="color:#fff;font-size:10px;">设为首页 | </a></span>
+    <span ><a href="javascript:window.external.AddFavorite('http://www.gzhtsoft.com', '广州华腾软件工作室')" style="color:#fff;font-size:10px;">收藏网站</a></span>
+  </div>
+</div>
+   <div class="navbar-inner" style="background-color:#1d2824">
+     <div class="container" >
+       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </a>
+       
+       <a class="navbar-text"  href="__ROOT__/"><!-- <img class="img-responsive" src="__TMPL__Public/images/logo.png"/> --><span style="color:#fff;margin-bottom: 0px; font-size: 30px;">广州华腾软件工作室</span></a>
+       <div class="nav-collapse collapse pull-right" id="main-menu">
+       	<?php
+    			$effected_id="main-menu";
+    		  	$filetpl="<a href='\$href' target='\$target'>\$label</a>";
+    		  	$foldertpl="<a href='\$href' target='\$target' class='dropdown-toggle' data-toggle='dropdown'>\$label <b class='caret'></b></a>";
+    		  	$ul_class="dropdown-menu" ;
+    		  	$li_class="myitem" ;
+    		  	$style="nav";
+    		  	$showlevel=6;
+    		  	$dropdown='dropdown';
+    		  	echo sp_get_menu("main",$effected_id,$filetpl,$foldertpl,$ul_class,$li_class,$style,$showlevel,$dropdown);
+    		?>
+		
+       </div>
+     </div>
+   </div>
+ </div>

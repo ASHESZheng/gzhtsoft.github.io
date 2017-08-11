@@ -1,0 +1,51 @@
+<br>
+<br>
+<br>
+<!-- Footer ================================================== -->
+<hr>
+
+ {:hook('footer')} 
+
+<div id="footer" style="background-color:#314240;">
+<div class="row">
+	<div class="col-sm-12" >
+	
+		<ul class="unstyled" style="color:#fff;">
+			<br>
+			<li class="contact li-header">联系我们</li>
+			<li class="contact contact-small">地址：广东省广州市增城区增江街道广州华立科技园华立路11号</li>
+			<li class="contact contact-small">电话：020-82905692</li>
+			<li class="contact contact-small">邮箱：{$site_admin_email}</li>
+			<li class="qrcode"><img src="__TMPL__Public/images/erweima.jpg" alt="二维码"></li>
+		</ul>
+		<div class=sl-f>
+			<div class="sl"></div>	
+		</div>	
+	</div>
+
+	<div class="col-sm-12 partner-block">	
+	<br>
+		<div class="partner" style="color:#fff;">合作伙伴</div>
+		<php>$links=sp_getlinks();</php>
+		<div class="partner-icon-block">
+			<foreach name="links" item="vo">
+				<span style="margin-right:5px;">
+				<a  target="{$vo.link_target}"><img src="__TMPL__{$vo.link_image}" class="partner-icon"></a>
+				</span>
+			</foreach>
+		</div>
+	</div>
+	
+	</div>	
+</div>
+
+<div style="background-color:#202b27; text-align: center; color:#fff;">
+	
+{$site_icp}
+</div>	
+<div id="backtotop">
+	<i class="fa fa-arrow-circle-up"></i>
+</div>
+
+{$site_tongji}
+

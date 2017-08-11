@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{$site_seo_title} {$site_name}</title>
+  <meta name="keywords" content="{$site_seo_keywords}" />
+  <meta name="description" content="{$site_seo_description}">
+  <tc_include file="Public:head" />
+  <link href="__TMPL__Public/css/slippry/slippry.css" rel="stylesheet">
+
+  <style>
+    .caption-wraper{position: absolute;left:370px;bottom:70px;}
+    .caption-wraper .caption{
+      position: relative;left:-50%;
+      background-color: rgba(0, 0, 0, 0.54);
+      padding: 0.4em 1em;
+      color:#fff;
+      -webkit-border-radius: 1.2em;
+      -moz-border-radius: 1.2em;
+      -ms-border-radius: 1.2em;
+      -o-border-radius: 1.2em;
+      border-radius: 1.2em;
+    }
+    @media (max-width: 10px){
+      .sy-box{margin: 12px -20px 0 -20px;}
+      .caption-wraper{left:0;bottom: 0.4em;}
+      .caption-wraper .caption{
+        left: 0;
+        padding: 0.2em 0.4em;
+        font-size: 0.92em;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        -ms-border-radius: 0;
+        -o-border-radius: 0;
+        border-radius: 0;}
+    }
+ 	.bq{
+ 		border-left: 5px solid #d7583c;
+    background-color: #eee;
+
+ 	}
+
+ 	.about{
+ 		background-color:#d7583c;
+ 		float:right;
+ 
+ 	}
+  .about:hover{
+      background-color:#d7583c;
+
+  }
+
+  .bs-callout {
+  padding:20px;
+ 
+  border:2px solid #ddd;
+  border-left-width:5px;
+  border-radius:3px
+}
+
+.bs-callout-info {
+  border-left-color:#d7583c;
+}
+.col-md-offset-1 {
+  margin-left: 4.33333333%;
+}
+.span3{
+  width:208px;
+  margin-left:4.05%;
+  float:left;
+  margin-bottom:-50px;
+}
+.myspan5{
+  width:383px;
+  float:left;
+}
+.myspan2{
+  width:7px;
+  float:left;
+  margin-right:14px;
+}
+.myspan7{
+   width:670px;
+}
+.myabspan2{
+  width:170px;
+  text-align:right;
+  display:inline;
+}
+
+</style>
+
+</head>
+<body>
+
+
+<tc_include file="Public:nav" />
+<php>
+  $home_slides=sp_sql_posts("cid:8;field:post_title,post_excerpt,post_content,tid,smeta;order:listorder desc;");
+</php>
+<div class="container">
+
+<ul id="homeslider" class="unstyled" style="display:none;">
+  <foreach name="home_slides" item="vo">
+  	<php>$smeta=json_decode($vo['smeta'],true);</php>
+  <if condition="!empty($smeta['photo'])">
+  	
+    <li>
+      <div class="caption-wraper" >
+      
+        <div class="caption " >
+	        <h1 style="color:#fff;font-size:150%;">{$vo.post_title}</h1>
+	        
+	         <p style="width:100%;">{$vo.post_excerpt}</p> 
+	        <p><a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}"><img src="__TMPL__Public/images/more.png" ></a></p>
+        </div>
+      </div>
+      <a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}"><img class="img-responsive" src="__ROOT__/data/upload/{$smeta['photo'][0]['url']}" alt="{$smeta['photo'][0]['alt']}" style="height:400px;"></a>
+    </li>
+
+   </if>
+  </foreach>
+</ul>
+
+
+
+  
+  <php> $content=sp_sql_page(58);</php>
+  <div style="padding-left:2%;padding-right:2%;padding-bottom:2%;">
+    <div class="bs-callout bs-callout-info " >
+	    <div class="row">
+	    <div class="myspan7" >
+	   		{$content['post_excerpt']|msubstr=0,112,'utf-8',false}
+	    </div>
+	        <div  class="myabspan2">
+	        <a href="{:U('page/index?&id=58')}}"  class="about btn btn-info" style="padding:12px 20px;">关于我们</a>
+	        </div>
+	    </div>
+    </div>
+ </div>     
+    
+ 
+
+
+  <div class="row text-center">
+    <div class="span5" >
+    <h2 class="font-large nospace text-center" ><a href="{:U('list/index?id=8')}">新闻中心</a></h2>
+      <php>
+        $newscenter=sp_sql_posts("cid:8;field:post_title,post_excerpt,tid,smeta;order:listorder asc;limit:4;");
+      </php>
+      <ul class="unstyled" style="width:383px;">
+      <foreach name="newscenter" item="news">
+        <li style="text-align:left;margin-left:22px;margin-bottom: 5px;text-overflow:clip;"><a title="{$news.post_title}" href="{:leuu('article/index',array('id'=>$news['tid'],'cid'=>$news['term_id']))}" style="font-size:130%;">{$news.post_title|msubstr=0,25,'utf-8',false}</a></li>
+      </foreach>
+    </ul>
+    </div>
+    <div class="span2" style="width:195px;">
+        <img src="__TMPL__Public/images/sl.png" alt="分割线">
+    </div>
+    <div class="span5">
+      <h2 class="font-large nospace text-center" > <a href="{:U('list/index?id=10')}">行业资讯</a></h2>
+       <php>
+        $infomation=sp_sql_posts("cid:10;field:post_title,post_excerpt,tid,smeta;order:listorder asc;limit:4;");
+      </php>
+      <ul class="unstyled" style="width:383px;">
+      <foreach name="infomation" item="info">
+        <li style="text-align:left;margin-bottom: 5px;"><a title="{$info.post_title}" href="{:leuu('article/index',array('id'=>$info['tid'],'cid'=>$info['term_id']))}" style="font-size:130%;">{$info.post_title|msubstr=0,27,'utf-8',false}</a></li>
+      </foreach>
+    </ul>
+    </div>
+  </div>
+
+  <div >
+    <h1 class="text-center">产品展示</h1>
+    <h3 class="text-center">Product display</h3>
+  </div>
+  <php>
+    $lastnews=sp_sql_posts("cid:12;field:post_title,post_excerpt,tid,smeta;order:listorder asc;limit:4;");
+
+  </php>
+  <div class="row text-center" >
+    <foreach name="lastnews" item="vo">
+      <php>$smeta=json_decode($vo['smeta'],true);
+      </php>
+      <div class="span3">  
+            <div  style="border:1px solid #bbb;">
+              <a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}">
+                <if condition="empty($smeta['thumb'])">
+                  <img src="__TMPL__Public/images/default_tupian1.png" class="img-responsive" alt="{$vo.post_title}"/>
+                  <else />
+                  <img src="{:sp_get_asset_upload_path($smeta['thumb'])}" class="img-responsive img-thumbnail" alt="{$vo.post_title}" />
+                </if>
+              </a>
+            </div>     
+      </div>
+    </foreach>
+  </div>
+
+  <tc_include file="Public:footer"/> 
+</div>
+
+
+
+<tc_include file="Public:scripts"/>
+
+
+
+<script type="text/javascript">
+  var d=document.getElementById('homeslider');
+  d.style.display='';
+
+</script>
+{:hook('footer_end')}
+</body>
+</html>

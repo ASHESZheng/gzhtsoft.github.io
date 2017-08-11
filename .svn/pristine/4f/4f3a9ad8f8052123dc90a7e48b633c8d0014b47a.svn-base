@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>{$name} {$seo_title} {$site_name}</title>
+		<meta name="keywords" content="{$seo_keywords}" />
+		<meta name="description" content="{$seo_description}">
+		<tc_include file="Public:head" />
+		<link href="__TMPL__Public/css/slippry/slippry.css" rel="stylesheet">
+		<style>
+			#pathnav {
+				background-color: #FFFFFF;
+			}
+			#mypulldown1 {
+				margin-top: 20px;
+			}
+		</style>
+		<style>
+			.class{background: url("pic/7.jpg")  top center no-repeat;background-size:1170px 40px;}
+			.div-1 {
+				position:relative;
+
+				left:13%;
+				margin-top: 0.5%;
+			}
+
+		</style>
+	</head>
+	<body>
+	<tc_include file="Public:nav" />
+	<body class="body-white">
+	<div class="div-1" >
+		<ul class="inline lead" style="font-size: 15px">
+			<li><a>当前位置:</a></li>
+			<li><a href="/index.php?g=portal&amp;m=index&amp;a=index&amp;id=">广州华腾软件工作室</a>
+			</li><i class="icon-chevron-right"></i>
+			<li><a href="/index.php?g=portal&amp;m=list&amp;a=index&amp;id=8">产品中心</a></li></ul></div>
+
+		<div class="container tc-main" style="margin-bottom: -80px;">
+
+			<div class="row">
+				<div class="span12">
+
+						<div class="class">
+							<div class="text-center"">
+							<h2><i class="#"></i> {$name}</h2>
+						</div></div>
+					<div class="comment-ranking" >
+						<php>
+							$lists = sp_sql_posts_paged("cid:$cat_id;order:post_modified DESC;",3);
+						</php>
+						<volist name="lists['posts']" id="vo">
+							<php>
+								$smeta=json_decode($vo['smeta'], true);
+							</php>
+							<div class="comment-ranking-inner" style="background-color:#fff;">
+								<div class="row-fluid" style="border:10px double #000;background-color:#fff;">
+									<div class="span3">
+
+											<div class="header">
+												<div class="item-image" style="text-align:center;padding-top:12%;">
+													<a class="img-wraper" href="{:leuu('article/index',array('id'=>$vo['tid']))}">
+														<if condition="empty($smeta['thumb'])">
+															<!--如果缩略图为空，在正文post_content中取第一个图片-->
+															<img style="float: none;margin-left: auto;margin-right: auto;border: 0px" title="{$vo.post_title}" src="<php>echo getimg($vo["post_content"]);</php>" alt="{$vo.post_title}" height="auto" border="0"/>
+														<else />
+															<img src="{:sp_get_asset_upload_path($smeta['thumb'])}" class="img-responsive img-thumbnail" alt="{$vo.post_title}"  height="auto" border="0"/>
+														</if>
+													</a>
+												</div>
+											</div>	
+
+									</div>
+									<div class="span9" style="text-align:center;">
+										<div class="text-center">
+										<h3 style="font-size: 18px;" class="name"><a href="{:leuu('article/index',array('id'=>$vo['tid']))}">{$vo.post_title}</a></h3>
+										</div>
+										<p style="padding-left:5px;">{$vo.post_content|msubstr=0,400}</p>
+
+											<div class="pull-right">
+											<a class="pull-right" href="{:leuu('article/index',array('id'=>$vo['tid']))}" style="font-size:40%;">&gt;&gt;查看详情&gt;&gt;</a>
+											</div>
+
+									</div>
+									
+								</div>
+							</div>
+						</volist>
+					</div>
+					<div style="width: 1170px height:500px" ">
+					<img src="pic/9.jpg" style="width: 1150px"/>
+				</div>
+					<div class="pagination">
+						<div class="text-center">
+						<ul>
+							{$lists['page']}
+						</ul>
+					</div></div>
+				</div>
+				<div class="span3">
+					<!-- sidebar right -->
+					<tc_include file="Public:sidebarpt" />
+				</div>
+			</div>
+		</div>
+		<tc_include file="Public:footer" />
+		<!-- JavaScript -->
+		<tc_include file="Public:scripts" />
+		<script src="__TMPL__Public/js/slippry.min.js"></script>
+		<script>
+			$(function() {
+				var demo1 = $("#homeslider").slippry({
+					transition: 'fade',
+					useCSS: true,
+					captions: false,
+					speed: 1000,
+					pause: 3000,
+					auto: true,
+					preload: 'visible'
+				});
+			});
+		</script>
+		{:hook('footer_end')}
+	</body>
+
+</html>

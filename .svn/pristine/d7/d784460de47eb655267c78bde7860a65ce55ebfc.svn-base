@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>联系我们 {$site_name}</title>
+<meta name="keywords" content="{$site_seo_keywords}" />
+<meta name="description" content="{$site_seo_description}">
+<tc_include file="Public:head" />
+<!-- <link rel="stylesheet" type="text/css" href="__TMPL__Public/simpleboot/themes/simplebootx/themes.min.css"> -->
+<!-- <link rel="stylesheet" type="text/css" href="__TMPL__Public/simpleboot/bootstrap/css/bootstrap-responsive.min.css"> -->
+<script src="http://api.map.baidu.com/api?v=1.3"></script>
+
+<style>
+img {
+	max-width: none;
+}
+@media (max-width:767px){
+	.personinfo{
+		padding:0px 29px;
+	}
+}
+@media (min-width:768px){
+	.contactway{
+		padding-left:44px;
+	}
+}
+</style>
+</head>
+<body class="body-white">
+	<tc_include file="Public:nav" />
+
+	<div class="section slice no-padding">
+		<div id="mapCanvas" class="map-canvas no-margin" style="height: 400px;">
+			<script type="text/javascript">
+				var map = new BMap.Map("mapCanvas"); // 创建Map实例
+				var point = new BMap.Point("113.869456","23.247916"); // 创建点坐标
+				map.centerAndZoom(point, 15); // 初始化地图,设置中心点坐标和地图级别。
+				map.enableScrollWheelZoom(); //启用滚轮放大缩小
+				//添加缩放控件
+				map.addControl(new BMap.NavigationControl());
+				map.addControl(new BMap.ScaleControl());
+				map.addControl(new BMap.OverviewMapControl());
+
+				var marker = new BMap.Marker(point); // 创建标注 
+				map.addOverlay(marker); // 将标注添加到地图中
+				var infoWindow = new BMap.InfoWindow("广州华腾软件工作室<br/><span class=''>地址：广州华立科技园行政楼</span>"); // 创建信息窗口对象
+				marker.openInfoWindow(infoWindow);
+			</script>
+		</div>
+	</div>
+	<div class="container">
+
+		<div class="row">
+			<div class="col-sm-12" >
+				<h3 class="section-title">联系我们</h3>
+				<form class="form-light js-ajax-form form-horizontal" role="form" method="post"
+					action="{:U('api/guestbook/addmsg')}">
+
+					
+
+
+				<div class="row personinfo">
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">姓名</label> 
+						<div class="col-sm-10">	
+							<input type="text" class="form-control" placeholder="请输入您的名字" name="full_name">
+						</div>
+					</div>
+						
+					<div class="form-group">						
+						<label class="col-sm-2 control-label">邮箱</label> 
+						<div class="col-sm-10">
+							<input type="email" class="form-control" placeholder="请输入您的邮箱账号" name="email">
+						</div>						
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">内容</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" id="message" placeholder="请输入内容" style="height: 100px;" name="msg">
+								
+							</textarea>
+						</div>
+					</div>
+
+					
+						
+					<div class="form-group">							
+						<label class="col-sm-2 control-label">验证码</label> 
+						<div class="col-sm-7">
+							<input type="text" class="form-control" placeholder="请输入验证码" name="verify" autocomplete="off">
+						</div>
+					</div>
+					
+
+					<div class="form-group">
+
+						<label class="col-sm-2 control-label">&nbsp;</label>
+						<div class="col-sm-10">
+							
+							{:sp_verifycode_img('length=4&font_size=16&width=150&height=34&use_noise=1&use_curve=0','style="cursor:pointer;vertical-align: top;" title="点击获取" ')}
+						</div>
+					</div>
+
+					<div class="form-group">
+
+						<label class="col-sm-2 control-label">&nbsp;</label>
+						<div class="col-sm-2 col-md-2">
+							
+							<button type="submit" class="btn btn-primary js-ajax-submit form-control" data-wait="1500">发送留言</button>
+						</div>
+					</div>
+					
+					
+				</form>
+			</div>
+			<div class="col-md-6 contactway">
+				<div class="row">
+					<div class="col-md-3">
+						<h3 class="section-title">联系方式</h3>
+						<div class="contact-info">
+							<h5>地址</h5>
+							<p>广东省广州市增城区增江街道广州华立科技园华立路11号</p>
+
+							<h5>邮箱</h5>
+							<p>{$site_admin_email}</p>
+
+							<h5>电话</h5>
+							<p>020-82905692</p>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<h3>Contact</h3>
+						<div class="contact-info">
+							<h5>Address</h5>
+							<p>HuaLi Technology GuangShan Road, GuangZhou China</p>
+
+							<h5>Email</h5>
+							<p>{$site_admin_email}</p>
+
+							<h5>Phone</h5>
+							<p>020-82905692</p>
+						</div>
+					</div>
+				</div>
+				<h3 class="section-title">快捷交流</h3>
+				<p>点击以下QQ图标，免加好友即时洽谈合作</p>
+				<div class="social-media">
+				<php> $cs=sp_getCs()</php>
+					<foreach name='cs' item='vo'>
+					<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$vo.qq}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:479923197:51" alt="点击这里给我发消息" title="点击这里给我发消息" /></a>
+					</foreach>
+
+					<!-- <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:479923197:51" alt="点击这里给我发消息" title="点击这里给我发消息" /></a> 
+					<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:479923197:51" alt="点击这里给我发消息" title="点击这里给我发消息" /></a> -->
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<tc_include file="Public:footer" />
+	<tc_include file="Public:scripts" />
+
+</body>
+</html>

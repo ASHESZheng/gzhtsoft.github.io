@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{$name} {$seo_title} {$site_name}</title>
+	<meta name="keywords" content="{$seo_keywords}" />
+	<meta name="description" content="{$seo_description}">
+	<tc_include file="Public:head" />
+	<style>
+		body{background: white;}
+	</style><!--修改背景颜色为白色-->
+	<style>
+		.middle{padding:24px 0px;}
+		.middle .firstChild{}
+		.middle .secondChild{margin-top:14%;}
+		.div-1 {
+			position:relative;
+			left:0%;
+			margin-top: 1%;
+		}
+		.cc{text-overflow:ellipsis;
+
+			white-space:nowrap;
+
+			overflow:hidden;
+		width: 80%;
+		}
+		@media (max-width: 459px){
+			.newpic{
+				width:130px;
+			}
+		}
+
+	</style>
+</head>
+<body>
+<tc_include file="Public:nav" />
+
+		<!-- <div class="container">
+			<div class="pg-opt pin">
+				<div class="span8" style="margin-bottom: 15px;letter-spacing:10px;">
+					<h2 class="text-center">{$name}</h2>
+				</div>
+			</div>
+			<div class="row" style="margin-left: 60px">
+				<div class="span8" >
+					<div class="">
+						<php>
+							$lists = sp_sql_posts_paged("cid:$cat_id;order:post_date DESC;",17);
+						</php>
+						<volist name="lists['posts']" id="vo">
+							<php>
+								$smeta=json_decode($vo['smeta'], true);
+							</php>
+							<div class="list-boxes" style="border-top: none;padding: 0px;margin-bottom: 0px;"> --><!--去除上边框-->
+							<!-- 	<a style=" text-decoration:none;float:right;font-size: 15px">[{:date('Y-m-d',strtotime($vo['post_date']))}]</a><h2 class="cc"><a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}" title="{$vo.post_title}">･{$vo.post_title}</a></h2><br> -->
+								<!--<p>{$vo.post_excerpt|msubstr=0,256}</p>   显示新闻详细内容-->
+<!-- 							</div>
+						</volist>
+
+					</div>
+				</div>
+					
+			</div>
+		</div>		
+ -->
+	<div class="container">
+			<div class="pg-opt pin">
+				<div  style="margin-bottom: 15px;letter-spacing:10px;">
+					<h2 class="text-center">{$name}</h2>
+				</div>
+			</div>
+
+
+		<php>
+			$lists=sp_sql_posts_paged("cid:$cat_id;order:post_date DESC;",5);
+		</php>
+		<ul class="media-list">
+			<volist name="lists['posts']" id="vo">
+			<php>
+				$smeta=json_decode($vo['smeta'],true);
+			</php>
+			<li class="media li-border">
+			<a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}" title="{$vo.post_title}">
+				<div class="media-left ">
+					<if condition="empty($smeta['thumb'])">
+						<img src="__TMPL__Public/images/default_tupian1.png" class="newpic" alt="{$vo.post_title}" />
+					<else/>
+						<img src="{:sp_get_asset_upload_path($smeta['thumb'])}" class="newpic" alt="{$vo.post_title}">
+					</if>
+				</div>
+				<div class="media-body">
+					<h4 class="media-heading">{$vo.post_date}</h4>
+					<p>
+						{$vo.post_excerpt}
+					</p>
+				</div>
+
+				</a>
+
+			</li>
+			</volist>
+		</ul>
+	</div>
+	<div style="text-align:center;">
+		<ul class="pagination">{$lists['page']}</ul><!--分页效果-->
+	</div>
+<tc_include file="Public:footer" />
+<!-- JavaScript -->
+<tc_include file="Public:scripts" />
+</body>
+</html>

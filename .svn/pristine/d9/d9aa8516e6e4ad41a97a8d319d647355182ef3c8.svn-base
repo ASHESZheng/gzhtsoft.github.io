@@ -1,0 +1,17 @@
+<?php
+/**
+ * 配置文件
+ */
+return array(
+    'DB_TYPE' => 'mysql',
+    'DB_HOST' => '10.10.128.202',
+    'DB_NAME' => 'thinkcmf',
+    'DB_USER' => 'admin',
+    'DB_PWD' => '411411411',
+    'DB_PORT' => '3306',
+    'DB_PREFIX' => 'htsoft_cmf_',
+    //密钥
+    "AUTHCODE" => '4vByrpUZnjlB6Ri8wZ',
+    //cookies
+    "COOKIE_PREFIX" => 'u4fkPx_',
+);

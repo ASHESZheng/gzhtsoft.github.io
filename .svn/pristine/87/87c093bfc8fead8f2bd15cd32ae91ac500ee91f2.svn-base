@@ -1,0 +1,51 @@
+<br>
+<br>
+<br>
+<!-- Footer ================================================== -->
+<hr>
+
+ {:hook('footer')} 
+
+<div id="footer" style="background-color:#314240;">
+<div class="row">
+	<div class="span2" style="width:100px;"></div>
+	<div class="span3">
+		<ul class="unstyled list-inline" style="color:#fff;style="color:#fff;">
+			<br>
+			<li style="font-size: 120%;display:block;margin-bottom:2%;">联系我们</li>
+			<li style="font-size: 80%; display:block;margin-bottom:2%;">地址：广东省广州市增城区增江街道广州华立科技园华立路11号</li>
+			<li style="font-size: 80%; display:block;margin-bottom:2%;">电话：020-82905692</li>
+			<li style="font-size: 80%; display:block;margin-bottom:2%;">邮箱：{$site_admin_email}</li>
+		</ul>	
+	</div>
+	<div class="span3" style="margin-left:10.5%;">
+	<br/>
+		<ul class="unstyled list-inline" style="color:#fff;">
+			<li style="font-size: 120%;display:block;margin-bottom:2%;text-align:center;" >微信公众号</li>
+			<li style="text-align:center;"><img src="__TMPL__Public/images/erweima.jpg" alt="二维码" style="margin-left:2%;margin-top:2px;margin-right:1%;"></li>
+		</ul>
+	</div>
+	<div class="span4" style="margin-left:11%;">	
+	<br>
+		<div style="color:#fff;margin-bottom:2%; font-size: 120%;">合作伙伴</div>
+		<php>$links=sp_getlinks();</php>
+		<foreach name="links" item="vo">
+			<div style="margin-right:7px;display: inline;">
+			<a  target="{$vo.link_target}"><img src="__TMPL__{$vo.link_image}" style="width:80px;height:60px;margin-bottom:7px;"></a>
+			</div>
+		</foreach>
+	</div>
+	
+	</div>	
+</div>
+<tc_include file="Public:service" />
+<div style="background-color:#202b27; text-align: center; color:#fff;">
+	
+{$site_icp}
+</div>	
+<div id="backtotop">
+	<i class="fa fa-arrow-circle-up"></i>
+</div>
+
+{$site_tongji}
+

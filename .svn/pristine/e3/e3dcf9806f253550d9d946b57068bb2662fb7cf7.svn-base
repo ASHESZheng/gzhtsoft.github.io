@@ -1,0 +1,27 @@
+<br>
+<br>
+<br>
+<!-- Footer ================================================== -->
+<hr>
+{:hook('footer')}
+<div id="footer" class="footer ">
+	<div class="links pull-right">
+		合作伙伴<br>
+		<php>$links=sp_getlinks();</php>
+		<foreach name="links" item="vo">
+			<a href="{$vo.link_url}" target="{$vo.link_target}"><img src="__TMPL__{$vo.link_image}" ></a>
+		</foreach>
+	</div>
+	<p>
+		<ul class="unstyled ">
+			<li>联系我们</li>
+			<li>地址：广东省广州市增城区增江街道广州华立科技园华立路7号</li>
+			<li>电话：020-82905692</li>
+			<li>邮箱：{$site_admin_email}</li>
+		</ul>
+	</p>
+</div>
+<div id="backtotop">
+	<i class="fa fa-arrow-circle-up"></i>
+</div>
+{$site_tongji}

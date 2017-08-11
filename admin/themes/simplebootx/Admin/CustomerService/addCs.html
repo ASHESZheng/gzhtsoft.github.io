@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>添加客服</title>
+	<link href="__TMPL__Public/assets/css/bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+
+	</style>
+	
+</head>
+<body>
+	<form  method="post" action="{:U('CustomerService/doadd')}" class="form-horizontal">
+
+	<table class="table table-border">
+		<thead>
+			<tr>
+				<th>添加客服</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td> 客服昵称</td>
+				<td><input  type="text" name="name" placeholder="请输入客服昵称"></td>
+			</tr>
+			<tr>
+				<td>客服QQ</td>
+				<td><input style="border:0 0 1px 0;"  type="text" name="qq" placeholder="请输入客服qq"></td>
+			</tr>
+			<tr>
+				<td><input class="btn btn-info" type="submit" class="form-control" value="提交"> <input class="btn btn-info" type="reset" class="form-control" value="重置"></td>
+				
+			</tr>
+		</tbody>
+	</table>
+		
+	</form>
+</body>
+</html>

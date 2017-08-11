@@ -1,0 +1,41 @@
+<br>
+<br>
+<br>
+<!-- Footer ================================================== -->
+<hr>
+
+ {:hook('footer')} 
+
+<div id="footer" style="background-color:#314240;">
+<div class="row">
+	<div class="span2"></div>
+	<div class="span6">
+		<ul class="unstyled list-inline" style="color:#fff;">
+			<br>
+			<li>联系我们</li><br>
+			<li>地址：广东省广州市增城区增江街道广州华立科技园华立路7号</li><br>
+			<li>电话：020-82905692</li><br>
+			<li>邮箱：{$site_admin_email}</li><br>
+		</ul>
+	</div>
+	<div class="span4">	
+	<br>
+		<span style="color:#fff;">合作伙伴</span><br>
+		<php>$links=sp_getlinks();</php>
+		<foreach name="links" item="vo">
+			<a href="{$vo.link_url}" target="{$vo.link_target}"><img src="__TMPL__{$vo.link_image}" ></a>
+		</foreach>
+	</div>
+	
+</div>	
+</div>
+<div style="background-color:#202b27; text-align: center; color:#fff;">
+	
+{$site_icp}
+</div>	
+<div id="backtotop">
+	<i class="fa fa-arrow-circle-up"></i>
+</div>
+
+{$site_tongji}
+

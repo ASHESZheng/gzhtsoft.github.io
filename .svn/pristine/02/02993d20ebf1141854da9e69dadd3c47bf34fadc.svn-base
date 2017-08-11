@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<head>
+	 <title>{$name} {$seo_title} {$site_name}</title>;
+	<meta name="keywords" content="{$seo_keywords}" />
+	<meta name="description" content="{$seo_description}">
+    <tc_include file="Public:head" />
+
+
+</head>
+<body>
+<tc_include file="Public:nav" />
+<php>
+
+	$l=F('all_terms');
+
+	$l['t0']=array('name'=>$site_name,'term_id'=>'');
+
+	$breadcrumb=explode('-',$l["t$cat_id"]['path']);
+
+	foreach($breadcrumb as $v){
+
+	$li[]=$l["t$v"];
+
+	}
+
+</php>
+
+<div class="" style="margin:20px 50px">
+<ul class="inline lead" style="font-size: 15px">
+    <li><a>当前位置:</a></li>
+    <li><a href="/index.php?g=portal&amp;m=index&amp;a=index&amp;id=">广州华腾软件工作室</a>
+    </li><i class="icon-chevron-right"></i>
+    <li><a href="/index.php?m=list&a=index&id=12">产品中心</a></li>
+<div class="container">
+	<php>
+    $lastnews=sp_sql_posts("cid:12;field:post_title,post_excerpt,tid,smeta;order:listorder asc;limit:3;");
+
+  </php>
+    <div style="width: 1170px height:200px" ">
+       <img src="pic/7.jpg" />
+    </div>
+  <foreach name="lastnews" item="vo">
+  <div class="row">
+ <php>$smeta=json_decode($vo['smeta'],true);</php>
+
+      <div class="span12">
+ <div class="span6">
+     
+            <div class="item-image" style="margin-top: 30px">
+              <a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}">
+                <if condition="empty($smeta['thumb'])">
+                  <img src="__TMPL__Public/images/default_tupian1.png" class="img-responsive" alt="{$vo.post_title}"/>
+                  <else />
+                  <img src="{:sp_get_asset_upload_path($smeta['thumb'])}" class="img-responsive img-thumbnail" alt="{$vo.post_title}" />
+                </if>
+              </a>
+            </div>
+  </div>
+
+  <div class="span5">
+           <div style="margin-left:50px">
+            <h3><a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}">{$vo.post_title}</a></h3>
+            <hr>
+          </div>
+          <div class="body" >
+            <p><a href="{:leuu('article/index',array('id'=>$vo['tid'],'cid'=>$vo['term_id']))}">{:msubstr($vo['post_excerpt'],0,32)}</a></p>
+          </div>
+   </div>
+
+         </div>  </div>
+  </foreach>
+
+    <div style="width: 1000px height:500px" ">
+    <img src="pic/9.jpg" />
+</div>
+ </div>
+
+<tc_include file="Public:footer" />
+<!-- JavaScript -->
+<tc_include file="Public:scripts" />
+</body>
+</html>
