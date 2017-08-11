@@ -1,7 +1,7 @@
 ## README
 ![Alt text](https://github.com/ASHESZheng/gzhtsoft.github.io/blob/master/Screenshots/1.png)
 
-本项目是基于ThinkCMF X2.2.3内容管理框架二次开发的华腾软件工作室官方网站企业形象宣传，企业风采展示，公司产品宣传，公司技术展示等六个模块，目前项目已上架http://www.gzhtsoft.com/可见。
+本项目是基于ThinkCMF X2.2.3内容管理框架二次开发的华腾软件工作室官方网站企业形象宣传，企业风采展示，公司产品宣传，公司技术展示等六个模块，目前项目已上架http://www.gzhtsoft.com
 
 github项目地址：https://github.com/ASHESZheng/gzhtsoft.github.io
 
