@@ -20,9 +20,19 @@ mysql 5.6+
 附上修改过的ThinkCMF文件及对应代码文件的基本目录
 修改过的前台模板文件目录
 
-\themes\simplebootx\Portal\
+\themes\simplebootx\Portal\about.html
+\themes\simplebootx\Portal\article.html
+\themes\simplebootx\Portal\contact.html
+\themes\simplebootx\Portal\gallery.html
+\themes\simplebootx\Portal\index.html
+\themes\simplebootx\Portal\list.html
+\themes\simplebootx\Portal\services.html
+....
 
-\themes\simplebootx\Portal\
+\themes\simplebootx\Public\footer.html
+\themes\simplebootx\Public\head.html
+\themes\simplebootx\Public\nav.html
+
 
 公共函数库（里面加入了一些其它自定义函数）
 
