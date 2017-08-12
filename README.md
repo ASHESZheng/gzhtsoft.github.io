@@ -21,16 +21,25 @@ mysql 5.6+
 修改过的前台模板文件目录
 
 \themes\simplebootx\Portal\about.html
+
 \themes\simplebootx\Portal\article.html
+
 \themes\simplebootx\Portal\contact.html
+
 \themes\simplebootx\Portal\gallery.html
+
 \themes\simplebootx\Portal\index.html
+
 \themes\simplebootx\Portal\list.html
+
 \themes\simplebootx\Portal\services.html
+
 ....
 
 \themes\simplebootx\Public\footer.html
+
 \themes\simplebootx\Public\head.html
+
 \themes\simplebootx\Public\nav.html
 
 
